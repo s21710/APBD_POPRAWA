@@ -32,23 +32,16 @@ namespace probne_kolokwium.Controllers
                 return BadRequest("Niepoprawne ciało żądania!");
 
             if (await _service.GetTeamById(team_id).FirstOrDefaultAsync() is null)
-                return NotFound("Nie znaleziono klienta o podanym id");
+                return NotFound("Nie znaleziono zespołu o podanym id");
 
             if (await _service.GetMemberById(body.MemberID).FirstOrDefaultAsync() is null)
-                return NotFound("Nie znaleziono pracownika o podanymn id");
+                return NotFound("Nie znaleziono członka o podanymn id");
 
             using (var scope = new TransactionScope(TransactionScopeAsyncFlowOption.Enabled))
             {
                 try
                 {
-                    foreach (var organization in body.Organizations)
-                    {
-                        if (await _service.GetOrganizationById(organization.OrganizationID).FirstOrDefaultAsync().ConfigureAwait(false) is null)
-                            return NotFound($"Nie znaleziono organizacji -- ID: {organization.OrganizationID}");
-
-
-                    }
-
+                    ///.... :(
                     scope.Complete();
 
                 }

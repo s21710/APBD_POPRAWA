@@ -8,7 +8,6 @@ namespace probne_kolokwium.DTOs
     {
         public int MemberID { get; set; }
 
-        public List<Organization> Organizations { get; set; }
     }
 
 }
